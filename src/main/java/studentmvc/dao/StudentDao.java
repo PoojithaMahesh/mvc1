@@ -28,6 +28,27 @@ public class StudentDao {
 		Query query=entityManager.createQuery("Select s from Student s");
 		return query.getResultList();
 	}
+
+	public void deleteStudent(int id) {
+		Student student=entityManager.find(Student.class, id);
+		EntityTransaction entityTransaction=entityManager.getTransaction();
+    	entityTransaction.begin();
+    	entityManager.remove(student);
+    	entityTransaction.commit();
+		
+	}
+
+	public Student findStudent(int id) {
+		Student student=entityManager.find(Student.class, id);
+		return student;
+	}
+
+	public void updateStudent(Student student) {
+		EntityTransaction entityTransaction=entityManager.getTransaction();
+		entityTransaction.begin();
+		entityManager.merge(student);
+		entityTransaction.commit();	
+	}
 	
 	
 	
